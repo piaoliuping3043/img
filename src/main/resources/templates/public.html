@@ -25,7 +25,7 @@
         var _hmt = _hmt || [];
         (function() {
             var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?fab3f739a7731fec975c7b172a35c7ed";
+            hm.src = "https://hm.baidu.com/hm.js?b0ab5de20557c995af0b3b73805d5ca5";
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
         })();
@@ -57,20 +57,21 @@
                 <p class="name">收藏美丽,分享美好!</p>
             </div>
         </div>
+        <!--/*@thymesVar id="currentType" type="com"*/-->
         <ul id="menu-ease-mobile" class="menu">
-            <li class="current-menu-parent"><a title="首页" href="/"><i></i>首页</a></li>
-            <li><a title="丝袜美女" th:href="'http://'+${domainName}+'/?type=swmn'"><i></i>丝袜美女</a></li>
-            <li><a title="美女模特" th:href="'http://'+${domainName}+'/?type=mnmt'"><i></i>美女模特</a></li>
-            <li><a title="清纯美女" th:href="'http://'+${domainName}+'/?type=qcmn'"><i></i>清纯美女</a></li>
-            <li><a title="美女写真" th:href="'http://'+${domainName}+'/?type=mnxz'"><i></i>美女写真</a></li>
-            <li><a title="内衣美女" th:href="'http://'+${domainName}+'/?type=nymv'"><i></i>内衣美女</a></li>
-            <li><a title="动漫美女" th:href="'http://'+${domainName}+'/?type=dmmv'"><i></i>动漫美女</a></li>
-            <li><a title="美女诱惑" th:href="'http://'+${domainName}+'/?type=mvyh'"><i></i>美女诱惑</a></li>
-            <li><a title="人体艺术" th:href="'http://'+${domainName}+'/?type=rtys'"><i></i>人体艺术</a></li>
-            <li><a title="韩国美女" th:href="'http://'+${domainName}+'/?type=hgmv'"><i></i>韩国美女</a></li>
-            <li><a title="日本美女" th:href="'http://'+${domainName}+'/?type=rbmn'"><i></i>日本美女</a></li>
-            <li><a title="欧美美女" th:href="'http://'+${domainName}+'/?type=ommn'"><i></i>欧美美女</a></li>
-            <li><a title="比基尼美女" th:href="'http://'+${domainName}+'/?type=bjnmn'"><i></i>比基尼美女</a></li>
+            <li th:class="${#strings.isEmpty(currentType)} ? 'current-menu-parent' : ''"><a title="首页" href="/"><i></i>首页</a></li>
+            <li th:class="${#strings.equals(currentType,'swmn')} ? 'current-menu-parent' : ''"><a title="丝袜美女" th:href="'http://'+${domainName}+'/?type=swmn'"><i></i>丝袜美女</a></li>
+            <li th:class="${#strings.equals(currentType,'mnmt')} ? 'current-menu-parent' : ''"><a title="美女模特" th:href="'http://'+${domainName}+'/?type=mnmt'"><i></i>美女模特</a></li>
+            <li th:class="${#strings.equals(currentType,'qcmn')} ? 'current-menu-parent' : ''"><a title="清纯美女" th:href="'http://'+${domainName}+'/?type=qcmn'"><i></i>清纯美女</a></li>
+            <li th:class="${#strings.equals(currentType,'mnxz')} ? 'current-menu-parent' : ''"><a title="美女写真" th:href="'http://'+${domainName}+'/?type=mnxz'"><i></i>美女写真</a></li>
+            <li th:class="${#strings.equals(currentType,'nymv')} ? 'current-menu-parent' : ''"><a title="内衣美女" th:href="'http://'+${domainName}+'/?type=nymv'"><i></i>内衣美女</a></li>
+            <li th:class="${#strings.equals(currentType,'dmmv')} ? 'current-menu-parent' : ''"><a title="动漫美女" th:href="'http://'+${domainName}+'/?type=dmmv'"><i></i>动漫美女</a></li>
+            <li th:class="${#strings.equals(currentType,'mvyh')} ? 'current-menu-parent' : ''"><a title="美女诱惑" th:href="'http://'+${domainName}+'/?type=mvyh'"><i></i>美女诱惑</a></li>
+            <li th:class="${#strings.equals(currentType,'rtys')} ? 'current-menu-parent' : ''"><a title="人体艺术" th:href="'http://'+${domainName}+'/?type=rtys'"><i></i>人体艺术</a></li>
+            <li th:class="${#strings.equals(currentType,'hgmv')} ? 'current-menu-parent' : ''"><a title="韩国美女" th:href="'http://'+${domainName}+'/?type=hgmv'"><i></i>韩国美女</a></li>
+            <li th:class="${#strings.equals(currentType,'rbmn')} ? 'current-menu-parent' : ''"><a title="日本美女" th:href="'http://'+${domainName}+'/?type=rbmn'"><i></i>日本美女</a></li>
+            <li th:class="${#strings.equals(currentType,'ommn')} ? 'current-menu-parent' : ''"><a title="欧美美女" th:href="'http://'+${domainName}+'/?type=ommn'"><i></i>欧美美女</a></li>
+            <li th:class="${#strings.equals(currentType,'bjnmn')} ? 'current-menu-parent' : ''"><a title="比基尼美女" th:href="'http://'+${domainName}+'/?type=bjnmn'"><i></i>比基尼美女</a></li>
         </ul>
     </nav>
 </div>

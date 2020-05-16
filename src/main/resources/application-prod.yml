@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8081
   
 mango:
   scan-package: vip.crazyboy.img.dao
@@ -16,4 +16,4 @@ logging:
   level:
     root: info
 domain:
-  name: www.186686.xyz
+  name: www.crazyboy.vip

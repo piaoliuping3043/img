@@ -12,4 +12,7 @@ public interface ImgDao extends CrudDao<ImgPO,Long> {
 
     @SQL("SELECT url FROM img WHERE article_id = :1")
     List<ImgPO> getAllImgUrl(long articleLd);
+
+    @SQL("SELECT url FROM img WHERE article_id = :1 limit 1")
+    String getFirstImgUrl(long articleLd);
 }

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export HOME=/root/img
+export HOME=/www/wwwroot/img
 
 
 

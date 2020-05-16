@@ -22,7 +22,7 @@
 
     <!--服务器环境-->
     <springProfile name="prod">
-        <property name="LOG_HOME" value="/root/img/logs"/>
+        <property name="LOG_HOME" value="/www/wwwroot/img"/>
         <!-- 按照每天生成日志文件 -->
         <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">

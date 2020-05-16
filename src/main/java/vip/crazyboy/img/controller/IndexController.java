@@ -52,12 +52,13 @@ public class IndexController {
     @RequestMapping("/")
     public String getArticleList(String type, @RequestParam(defaultValue = "1") Integer pageNum, Model model){
         List<ArticlePO> po = articleDao.getArticleList(type, (pageNum-1) * CommonUtil.NUM_PAGE, CommonUtil.NUM_PAGE);
-        if (StringUtils.isNotBlank(type)) {
+        if (StringUtils.isNotBlank(type) || null != type) {
             model.addAttribute("nextPageUrl", "/?type="+type+"&pageNum="+(pageNum+1));
         }else {
             model.addAttribute("nextPageUrl", "/?pageNum="+(pageNum+1));
         }
         publicVar(model, po);
+        model.addAttribute("currentType", type);
         return "list";
     }
 
@@ -77,6 +78,7 @@ public class IndexController {
         model.addAttribute("imgList", allImgUrl);
         model.addAttribute("article", articlePO);
         model.addAttribute("domainName", envConfig.getDomainName());
+        model.addAttribute("currentType", articlePO.getType());
         return "detail";
     }
 
