@@ -1,0 +1,19 @@
+server:
+  port: 80
+  
+mango:
+  scan-package: vip.crazyboy.img.dao
+  datasources:
+    - name: crawler
+      master:
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://140.143.230.240:3306/crawler?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+        user-name: liupeng
+        password: niuniu198!
+        maximum-pool-size: 10
+        connection-timeout: 3000
+logging:
+  level:
+    root: info
+domain:
+  name: www.186686.xyz

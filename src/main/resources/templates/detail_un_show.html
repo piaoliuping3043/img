@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{public::head}"></div>
+<body>
+<div id="st-container" class="st-container st-effect-2">
+    <div th:replace="~{public::class}"></div>
+    <div class="st-pusher">
+        <div class="st-content">
+            <div class="st-content-inner">
+                <div th:replace="public::search"></div>
+                <center>
+                    <div id="content" class="blog blog-single" >
+                        <article class="clearfix">
+                            <!--标题头-->
+                            <div class="place-padding">
+                                <h2 class="blog-title" th:text="${article.title}"></h2>
+                                <div class="post-meta">
+                                    <span th:text="'编辑：帅气的炀哥 更新时间：'+${#dates.format(article.getUpdateDate(),'yyyy-MM-dd HH:mm')}"></span>
+                                    <scan th:replace="public::type"></scan>
+                                </div>
+                            </div>
+                            <!--正题-->
+                            <div th:each="img:${imgList}">
+                                <article class="placeholder" th:if="${imgStat.index}<=3">
+                                    <div class="place-padding">
+                                        <figure>
+                                            <img class="featured-image aligncenter lazy"
+                                                 src="/static/img/noimg.png" th:data-original="${img.url}"/>
+                                        </figure>
+                                    </div>
+                                </article>
+
+                                <article class="placeholder no" th:if="${imgStat.index} >= 3">
+                                    <div class="place-padding">
+                                        <figure>
+                                            <img class="featured-image aligncenter lazy"
+                                                 src="/static/img/noimg.png" th:data-original="${img.url}"/>
+                                        </figure>
+                                    </div>
+                                </article>
+                            </div>
+                        </article>
+                        <div class="text-center">
+                            <div class="prev-next more" id="pagebtn">
+                                <span id="morebtn"class="button radius"onClick="showmore();">展开更多</span>
+                            </div>
+                            <a th:href="'/update?state=1&id='+${article.id}">显示</a>
+                            <a th:href="'/update?state=2&id='+${article.id}">删除</a>
+                        </div>
+                    </div>
+                    <div th:replace="~{public::footer}"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="totop">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+    </div>
+    <script type="text/javascript" src="/static/js/160505m.js"></script>
+</body>
+</html>

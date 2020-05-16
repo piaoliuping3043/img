@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{public::head}"></div>
+<body>
+<div id="st-container" class="st-container st-effect-2">
+    <div th:replace="~{public::class}"></div>
+    <div class="st-pusher">
+        <div class="st-content">
+            <div class="st-content-inner">
+                <div th:replace="public::search"></div>
+                <div style="background: #fff;margin-bottom: 8px;">
+                    <center><span style="font-size:12px">686网址:<b><FONT color=#ff0000>186686.xyz</FONT></b>。感谢有您一直以来的支持和厚爱！</span>
+                        <center>
+                            <div id="content" class="blog">
+
+                                <article th:class="${articleStat.index} <= 3 ? 'placeholder' : 'placeholder no'" th:each="article:${poList}">
+                                    <i th:replace="public::detail"></i>
+                                </article>
+
+                                <div class="text-center">
+                                    <div class="prev-next more" id="pagebtn">
+                                        <a class="button radius" th:href="${nextPageUrl}">下一页</a> <span id="morebtn"
+                                                                                                        class="button radius"
+                                                                                                        onClick="showmore();">查看更多</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:replace="~{public::footer}"></div>
+                </div>
+            </div>
+        </div>
+        <div id="totop">
+            <div class="arrow"></div>
+            <div class="stick"></div>
+        </div>
+        <script type="text/javascript" src="/static/js/160505m.js"></script>
+</body>
+</html>

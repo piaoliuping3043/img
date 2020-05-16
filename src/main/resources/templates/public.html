@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <!--/*@thymesVar id="domainName" type="com"*/-->
+    <meta charset="UTF-8"/>
+    <meta http-equiv="Cache-Control" content="no-transform"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="canonical" th:href="${domainName}"/>
+    <meta name="viewport"
+          content="width=device-width,height=device-height, initial-scale=1.0, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="applicable-device" content="mobile">
+    <title>美女图片_极品美女写真_销魂美女图库_高清性感美女图片</title>
+    <meta name="keywords" content="mm,mm图片,美女,图片,写真,美女图片,美女写真,人体艺术,比基尼,壁纸"/>
+    <meta name="description" content="美女图片网，收集精美的美女图片，包括明星美女写真图片专辑，大学校花美女贴图，性感车模写真等各类最新最好看的性感美女图片。"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-title" content="686美女图片"/>
+    <link rel="stylesheet" href="/static/css/150703m.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/css/fontello.css" type="text/css"/>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?fab3f739a7731fec975c7b172a35c7ed";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            } else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+</head>
+<div th:fragment="class">
+    <!--/*@thymesVar id="domainName" type="com"*/-->
+    <nav class="st-menu st-effect-2" id="menu-2">
+        <div id="header-info">
+            <div class="header-logo">
+                <a th:href="${domainName}"><img src="/static/img/logo.jpg" alt="美女图片" title="m美女图片"
+                                                     show="force"/></a>
+            </div>
+            <div class="header-info-content">
+                <p class="site">MM美女图片</p>
+                <p class="name">收藏美丽,分享美好!</p>
+            </div>
+        </div>
+        <ul id="menu-ease-mobile" class="menu">
+            <li class="current-menu-parent"><a title="首页" href="/"><i></i>首页</a></li>
+            <li><a title="丝袜美女" th:href="'http://'+${domainName}+'/?type=swmn'"><i></i>丝袜美女</a></li>
+            <li><a title="美女模特" th:href="'http://'+${domainName}+'/?type=mnmt'"><i></i>美女模特</a></li>
+            <li><a title="清纯美女" th:href="'http://'+${domainName}+'/?type=qcmn'"><i></i>清纯美女</a></li>
+            <li><a title="美女写真" th:href="'http://'+${domainName}+'/?type=mnxz'"><i></i>美女写真</a></li>
+            <li><a title="内衣美女" th:href="'http://'+${domainName}+'/?type=nymv'"><i></i>内衣美女</a></li>
+            <li><a title="动漫美女" th:href="'http://'+${domainName}+'/?type=dmmv'"><i></i>动漫美女</a></li>
+            <li><a title="美女诱惑" th:href="'http://'+${domainName}+'/?type=mvyh'"><i></i>美女诱惑</a></li>
+            <li><a title="人体艺术" th:href="'http://'+${domainName}+'/?type=rtys'"><i></i>人体艺术</a></li>
+            <li><a title="韩国美女" th:href="'http://'+${domainName}+'/?type=hgmv'"><i></i>韩国美女</a></li>
+            <li><a title="日本美女" th:href="'http://'+${domainName}+'/?type=rbmn'"><i></i>日本美女</a></li>
+            <li><a title="欧美美女" th:href="'http://'+${domainName}+'/?type=ommn'"><i></i>欧美美女</a></li>
+            <li><a title="比基尼美女" th:href="'http://'+${domainName}+'/?type=bjnmn'"><i></i>比基尼美女</a></li>
+        </ul>
+    </nav>
+</div>
+
+<div th:fragment="search">
+    <!--/*@thymesVar id="domainName" type="com"*/-->
+    <header id="header">
+        <div id="nav-menu-switcher">
+            <button data-effect="st-effect-2" class="header-left icon-menu"></button>
+        </div>
+        <h1><a class="site-name" th:text="${domainName}"></a></h1>
+        <div id="menu-search" class="header-right icon-search" onclick="Displaysearch();"></div>
+    </header>
+    <div id="search-template">
+        <div class="search-form">
+            <form method="post" action="/search">
+                <fieldset>
+                    <input type="search" name="keyWord" placeholder="点击这里搜索..." value=""
+                           onfocus="if (this.value == '搜索 ...') {this.value = '';}"
+                           onblur="if (this.value == '') {this.value = '搜索 ...';}">
+                    <input type="submit" value="搜 索">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="footer">
+    <!--/*@thymesVar id="domainName" type="com"*/-->
+    <footer>
+        <p>本站所有图片均收集于互联网,如有侵犯版权请来信告知</p>
+        <p>Copyright 2016-2022 © <a th:href="'http://'+${domainName}">美女图片</a>
+        <p th:text="${domainName}"></p>
+    </footer>
+</div>
+
+    <!--/*@thymesVar id="article" type="vip.crazyboy.img.entity.ArticlePO"*/-->
+<div class="place-padding" th:fragment="detail">
+    <h2><a rel="bookmark" th:text="${article.title}"target="_blank"></a></h2>
+    <div class="post-meta">
+        <span class="time" th:text="${article.getUpdateDateStr()}"></span> <em></em>
+        <span th:replace="::type"></span>
+        <em></em>
+    </div>
+    <figure>
+        <a th:href="'/detail?id=' + ${article.id}" th:title="${article.title}" target="_blank"><img class="featured-image aligncenter lazy" src="/static/img/noimg.png" th:data-original="${article.imgUrl}" th:alt="${article.title}"/></a>
+    </figure>
+</div>
+
+<!--/*@thymesVar id="article" type="vip.crazyboy.img.entity.ArticlePO"*/-->
+<span class="category" th:switch="${article.type}" th:fragment="type">
+            <a th:case="swmn" th:href="'/?type='+${article.getType()}" rel="category tag">丝袜美女</a>
+            <a th:case="mnmt" th:href="'/?type='+${article.getType()}" rel="category tag">美女模特</a>
+            <a th:case="qcmn" th:href="'/?type='+${article.getType()}" rel="category tag">清纯美女</a>
+            <a th:case="mnxz" th:href="'/?type='+${article.getType()}" rel="category tag">美女写真</a>
+            <a th:case="nymv" th:href="'/?type='+${article.getType()}" rel="category tag">内衣美女</a>
+            <a th:case="dmmv" th:href="'/?type='+${article.getType()}" rel="category tag">动漫美女</a>
+            <a th:case="mvyh" th:href="'/?type='+${article.getType()}" rel="category tag">美女诱惑</a>
+            <a th:case="rtys" th:href="'/?type='+${article.getType()}" rel="category tag">人体艺术</a>
+            <a th:case="hgmv" th:href="'/?type='+${article.getType()}" rel="category tag">韩国美女</a>
+            <a th:case="rbmn" th:href="'/?type='+${article.getType()}" rel="category tag">日本美女</a>
+            <a th:case="ommn" th:href="'/?type='+${article.getType()}" rel="category tag">欧美美女</a>
+            <a th:case="bjnmn" th:href="'/?type='+${article.getType()}" rel="category tag">比基尼美女</a>
+            <a th:case="*" th:href="'/?type='+${article.type}" rel="category tag">性感妹子</a>
+
+</span>
+</html>
