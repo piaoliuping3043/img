@@ -13,7 +13,7 @@
                         <center>
                             <div id="content" class="blog">
 
-                                <article th:class="${articleStat.index} <= 3 ? 'placeholder' : 'placeholder no'" th:each="article:${poList}">
+                                <article th:class="${articleStat.index} <= 20 ? 'placeholder' : 'placeholder no'" th:each="article:${poList}">
                                     <i th:replace="public::detail"></i>
                                 </article>
 

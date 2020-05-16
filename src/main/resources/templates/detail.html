@@ -21,16 +21,7 @@
                             </div>
                             <!--正题-->
                             <div th:each="img:${imgList}">
-                                <article class="placeholder" th:if="${imgStat.index}<=3">
-                                    <div class="place-padding">
-                                        <figure>
-                                            <img class="featured-image aligncenter lazy"
-                                                 src="/static/img/noimg.png" th:data-original="${img.url}"/>
-                                        </figure>
-                                    </div>
-                                </article>
-
-                                <article class="placeholder no" th:if="${imgStat.index} >= 3">
+                                <article th:class="${imgStat.index} <= 50 ? 'placeholder' : 'placeholder no'">
                                     <div class="place-padding">
                                         <figure>
                                             <img class="featured-image aligncenter lazy"
