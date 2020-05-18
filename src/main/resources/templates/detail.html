@@ -21,7 +21,7 @@
                             </div>
                             <!--正题-->
                             <div th:each="img:${imgList}">
-                                <article th:class="${imgStat.index} <= 50 ? 'placeholder' : 'placeholder no'">
+                                <article class="placeholder">
                                     <div class="place-padding">
                                         <figure>
                                             <img class="featured-image aligncenter lazy"
@@ -31,11 +31,6 @@
                                 </article>
                             </div>
                         </article>
-                        <div class="text-center">
-                            <div class="prev-next more" id="pagebtn">
-                                <span id="morebtn"class="button radius"onClick="showmore();">展开更多</span>
-                            </div>
-                        </div>
                     </div>
                     <div th:replace="~{public::footer}"></div>
             </div>

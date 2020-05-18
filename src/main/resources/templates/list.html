@@ -13,15 +13,13 @@
                         <center>
                             <div id="content" class="blog">
 
-                                <article th:class="${articleStat.index} <= 20 ? 'placeholder' : 'placeholder no'" th:each="article:${poList}">
+                                <article class="placeholder" th:each="article:${poList}">
                                     <i th:replace="public::detail"></i>
                                 </article>
 
                                 <div class="text-center">
-                                    <div class="prev-next more" id="pagebtn">
-                                        <a class="button radius" th:href="${nextPageUrl}">下一页</a> <span id="morebtn"
-                                                                                                        class="button radius"
-                                                                                                        onClick="showmore();">查看更多</span>
+                                    <div class="prev-next">
+                                        <a class="button radius" th:href="${nextPageUrl}">下一页</a>
                                     </div>
                                 </div>
                             </div>
