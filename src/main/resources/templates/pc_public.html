@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<script th:fragment="baidu">
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b0ab5de20557c995af0b3b73805d5ca5";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+<div class="mainnav" th:fragment="class">
+    <h1 class="logo"><a href="https://www.amm131.com">MM131美女图片</a></h1>
+    <ul id="menu-nav" class="menu">
+        <li th:class="${#strings.isEmpty(currentType)} ? 'current-menu-parent' : ''"><a title="首页" href="/pc/">首页</a></li>
+        <li th:class="${#strings.equals(currentType,'swmn')} ? 'current-menu-parent' : ''"><a title="丝袜美女" th:href="'http://'+${domainName}+'/pc/?type=swmn'">丝袜</a></li>
+        <li th:class="${#strings.equals(currentType,'mnmt')} ? 'current-menu-parent' : ''"><a title="美女模特" th:href="'http://'+${domainName}+'/pc/?type=mnmt'">模特</a></li>
+        <li th:class="${#strings.equals(currentType,'qcmn')} ? 'current-menu-parent' : ''"><a title="清纯美女" th:href="'http://'+${domainName}+'/pc/?type=qcmn'">清纯</a></li>
+        <li th:class="${#strings.equals(currentType,'mnxz')} ? 'current-menu-parent' : ''"><a title="美女写真" th:href="'http://'+${domainName}+'/pc/?type=mnxz'">写真</a></li>
+        <li th:class="${#strings.equals(currentType,'nymv')} ? 'current-menu-parent' : ''"><a title="内衣美女" th:href="'http://'+${domainName}+'/pc/?type=nymv'">内衣</a></li>
+        <li th:class="${#strings.equals(currentType,'dmmv')} ? 'current-menu-parent' : ''"><a title="动漫美女" th:href="'http://'+${domainName}+'/pc/?type=dmmv'">动漫</a></li>
+        <li th:class="${#strings.equals(currentType,'mvyh')} ? 'current-menu-parent' : ''"><a title="美女诱惑" th:href="'http://'+${domainName}+'/pc/?type=mvyh'">诱惑</a></li>
+        <li th:class="${#strings.equals(currentType,'rtys')} ? 'current-menu-parent' : ''"><a title="人体艺术" th:href="'http://'+${domainName}+'/pc/?type=rtys'">艺术</a></li>
+        <li th:class="${#strings.equals(currentType,'hgmv')} ? 'current-menu-parent' : ''"><a title="韩国美女" th:href="'http://'+${domainName}+'/pc/?type=hgmv'">韩国</a></li>
+        <li th:class="${#strings.equals(currentType,'rbmn')} ? 'current-menu-parent' : ''"><a title="日本美女" th:href="'http://'+${domainName}+'/pc/?type=rbmn'">日本</a></li>
+        <li th:class="${#strings.equals(currentType,'ommn')} ? 'current-menu-parent' : ''"><a title="欧美美女" th:href="'http://'+${domainName}+'/pc/?type=ommn'">欧美</a></li>
+        <li th:class="${#strings.equals(currentType,'bjnmn')} ? 'current-menu-parent' : ''"><a title="比基尼美女" th:href="'http://'+${domainName}+'/pc/?type=bjnmn'">比基尼</a></li>
+    </ul>
+    <span class="search">
+            <form method="post" class="searchform" action="/pc/search">
+                <input class="search-input" name="keyWord" type="text" placeholder="搜索是种美德">
+                <button class="search-btn" type="submit">搜索</button>
+            </form>
+        </span>
+</div>
+
+
+<div th:fragment="footer">
+    <!--/*@thymesVar id="domainName" type="com"*/-->
+    <div class="footer">
+        <p>本站所有图片均收集于互联网,如有侵犯版权请来信告知</p>
+        <p>Copyright 2016-2022 © <a th:href="'http://'+${domainName}">美女图片</a>
+        <p th:text="${domainName}"></p>
+    </div>
+</div>
+
+
+
+    <!--/*@thymesVar id="article" type="vip.crazyboy.img.entity.ArticlePO"*/-->
+<div class="place-padding" th:fragment="detail">
+    <h2><a rel="bookmark" th:text="${article.title}"target="_blank"></a></h2>
+    <div class="post-meta">
+        <span class="time" th:text="${article.getUpdateDateStr()}"></span> <em></em>
+        <span th:replace="::type"></span>
+        <em></em>
+    </div>
+    <figure>
+        <a th:href="'/detail?id=' + ${article.id}" th:title="${article.title}" target="_blank"><img class="featured-image aligncenter lazy" src="/static/img/noimg.png" th:data-original="${article.imgUrl}" th:alt="${article.title}"/></a>
+    </figure>
+</div>
+
+<!--/*@thymesVar id="article" type="vip.crazyboy.img.entity.ArticlePO"*/-->
+<span class="category" th:switch="${article.type}" th:fragment="type">
+            <a th:case="swmn" th:href="'/?type='+${article.getType()}" rel="category tag">丝袜美女</a>
+            <a th:case="mnmt" th:href="'/?type='+${article.getType()}" rel="category tag">美女模特</a>
+            <a th:case="qcmn" th:href="'/?type='+${article.getType()}" rel="category tag">清纯美女</a>
+            <a th:case="mnxz" th:href="'/?type='+${article.getType()}" rel="category tag">美女写真</a>
+            <a th:case="nymv" th:href="'/?type='+${article.getType()}" rel="category tag">内衣美女</a>
+            <a th:case="dmmv" th:href="'/?type='+${article.getType()}" rel="category tag">动漫美女</a>
+            <a th:case="mvyh" th:href="'/?type='+${article.getType()}" rel="category tag">美女诱惑</a>
+            <a th:case="rtys" th:href="'/?type='+${article.getType()}" rel="category tag">人体艺术</a>
+            <a th:case="hgmv" th:href="'/?type='+${article.getType()}" rel="category tag">韩国美女</a>
+            <a th:case="rbmn" th:href="'/?type='+${article.getType()}" rel="category tag">日本美女</a>
+            <a th:case="ommn" th:href="'/?type='+${article.getType()}" rel="category tag">欧美美女</a>
+            <a th:case="bjnmn" th:href="'/?type='+${article.getType()}" rel="category tag">比基尼美女</a>
+            <a th:case="*" th:href="'/?type='+${article.type}" rel="category tag">性感妹子</a>
+
+</span>
+</html>

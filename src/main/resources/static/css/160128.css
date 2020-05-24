@@ -1,5 +1,5 @@
 @charset "utf-8";
-body {font-family: Arial;font-size: 12px;color: #333;background-color: #EEE;margin: 0;}
+body {font-family: Arial;font-size: 12px;color: #333;background-color: #000;margin: 0;}
 img {border: none;}
 a {color: #333;text-decoration: none;}
 a:hover {color: #FF88AF;text-decoration: none;}
@@ -7,7 +7,7 @@ ul,dl,dt,dd,h1,h2,h3,p,form,input {font-weight: normal;margin: 0;padding: 0;list
 li,dt,dd {display: inline;float: left;}
 .header {background: url(img/header.png) repeat-x left top;_background: url(img/header.gif) repeat-x left top;height: 63px;_height: 70px;width: 100%;margin: 0 auto;position: fixed;z-index: 2015;top: 0;left: 0;}
 .mainnav {width: 1018px;height: 61px;margin: 0 auto;}
-.logo {background: url(img/logo.png) repeat-x left top;float: left;height: 60px;width: 100px;overflow: hidden;}
+.logo {background: url(/static/img/logo.png) repeat-x left top;float: left;height: 60px;width: 100px;overflow: hidden;}
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2){.logo{background: url(img/logo@2x.png);background-size: 100px 60px}}
 .logo a {text-indent: -9999px;float: left;height: 59px;width: 100px;}
 .menu {font-size: 14px;color: #FFF;float: left;height: 60px;width: 642px;padding-left: 18px;}
@@ -86,18 +86,18 @@ li,dt,dd {display: inline;float: left;}
 .all li em {font-size: 14px;color: #333;font-weight: bold;}
 .all li p.url {line-height:30px;color: #333;display: none;padding-top: 5px;margin-left: 10px}
 .all li p.on {display: inline;}
-.content {background-color: #FFF;float: left;width: 748px;}
+.content {background-color: #FFF;float: left;width: 998px;}
 .currentpath{padding:10px;border-bottom: 1px solid #EEE;float: left;width: 728px}
-.main-title {font-size: 18px;font-weight: bold;float: left;height: 24px;width: 735px;padding-top: 10px;padding-left: 10px;}
-.main-meta {color: #999;float: left;height: 38px;width: 738px;padding-left: 10px;border-bottom: 1px solid #EEE;}
+.main-title {font-size: 18px;font-weight: bold;float: left;height: 24px;width: 988px;padding-top: 10px;padding-left: 10px;background: #ff88af42;}
+.main-meta {color: #999;float: left;height: 38px;width: 988px;padding-left: 10px;border-bottom: 1px solid #EEE;background: #ff88af42;}
 .main-meta span {display: inline-block;margin-top: 8px;margin-right: 10px;}
 .main-meta span.share {display: inline;float: right;height: 28px;width: 187px;margin-top: 0;margin-right: 0;}
 .main-meta a {color: #999;}
 .main-meta a:hover {color: #FF88AF;text-decoration: none;}
-.main-image {text-align: center;float: left;width: 748px;min-height: 300px}
-.main-image p{margin-top: 10px;}
+.main-image {text-align: center;float: left;width: 998px;min-height: 300px; background: #ff88af42;}
+.main-image p{margin-top: 10px;background: #ff88af42;}
 .main-image p a{display: block;}
-.main-image img {max-width: 728px;}
+.main-image img {max-width: 998px;}
 .main-tags {float: left;height: 38px;width: 740px;}
 .main-tags span,.main-tags a {background-color: #EEE;display: inline-block;padding: 5px 8px;margin-right: 8px}
 .main-tags span {background-color: #FFF;margin-left: 5px;}
@@ -120,7 +120,6 @@ li,dt,dd {display: inline;float: left;}
 .clearfix:after{content:'.';display:block;height:0;clear:both;visibility:hidden;}
 .clearfix{*zoom:1;}
 .clearfix .clear{_height:0px;}
-
 .totop {position: fixed;right: 30px;transition: bottom ease .3s;bottom: -85px;z-index: 3;cursor:pointer;}
 .totop .cbbtn {width: 40px;height: 40px;display: block;background-color: #ff88af;}
 .totop .gotop {transition: background-color ease .3s;margin-top: 1px;}

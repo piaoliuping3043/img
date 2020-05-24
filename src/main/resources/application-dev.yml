@@ -16,5 +16,5 @@ logging:
   level:
     root: info
 domain:
-  name: 192.168.2.163
+  name: http://192.168.2.163
 

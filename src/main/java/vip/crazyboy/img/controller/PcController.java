@@ -68,7 +68,7 @@ public class PcController {
         }
         publicVar(model, po);
         model.addAttribute("currentType", type);
-        return "list_pc";
+        return "pc_list";
     }
 
     @RequestMapping("/search")
@@ -76,7 +76,7 @@ public class PcController {
         List<ArticlePO> po = articleDao.getByTitle("%"+keyWord+"%", (pageNum-1) * CommonUtil.NUM_PAGE, CommonUtil.NUM_PAGE);
         model.addAttribute("nextPageUrl", "/pc/?keyWord="+keyWord+"&pageNum="+(pageNum+1));
         publicVar(model, po);
-        return "list";
+        return "pc_list";
     }
 
 
@@ -88,7 +88,7 @@ public class PcController {
         model.addAttribute("article", articlePO);
         model.addAttribute("domainName", envConfig.getDomainName());
         model.addAttribute("currentType", articlePO.getType());
-        return "detail";
+        return "pc_detail";
     }
 
     @RequestMapping("/getNoShow")

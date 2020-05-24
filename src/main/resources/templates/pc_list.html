@@ -1,0 +1,95 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="applicable-device"content="pc">
+    <meta name="viewport" content="width=device-width,minimum-scale=0.67,maximum-scale=1,initial-scale=0.67" />
+    <link rel="alternate" media="only screen and(max-width: 640px)"     href="https://m.amm131.com/" >
+    <meta name="mobile-agent" content="format=html5;url=https://m.amm131.com/" >
+    <script src="/static/js/uaredirect.js" type="text/javascript"></script>
+    <script type="text/javascript">uaredirect("https://m.amm131.com/");</script>
+    <title>MM131美女图片_极品美女写真_销魂美女图库_高清性感美女图片</title>
+    <meta name="keywords" content="mm,mm图片,美女,图片,写真,美女图片,美女写真" />
+    <meta name="description" content="mm131美女图片网，收集精美的美女图片，包括明星美女写真图片专辑，大学校花美女贴图，性感车模写真等各类最新最好看的性感美女图片。" />
+    <meta name="renderer" content="webkit">
+    <link href="/static/css/160128.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon-precomposed" href="/static/img/logo.png">
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/three.js"></script>
+</head>
+<body>
+<div class="header">
+    <div th:replace="pc_public::class"></div>
+</div>
+<script th:replace="pc_public::baidu"></script>
+<script th:replace="snow::snow"></script>
+
+<div class="main">
+    <div class="main-content">
+        <div class="postlist">
+            <ul id="pins">
+                <li th:each="article:${poList}">
+                    <a th:href="'/pc/detail?id=' + ${article.id}" target="_blank">
+                    <img width='236' height='354' class='lazy' th:alt="${article.title}" src='/static/img/noimg.png' th:data-original="${article.imgUrl}" />
+                    </a>
+                    <span><a href="/xinggan/5771.html" target="_blank" th:text="${article.title}"></a></span>
+                    <span class="time" th:text="${article.getUpdateDateStr()}"></span><span class="view"></span></li>
+            </ul>
+            <div class='pagenavi'>
+                <a class="next page-numbers" th:href="${beforePageUrl}" th:if="${!#strings.isEmpty(beforePageUrl)}"><span>上一页</span></a>
+                <a class="next page-numbers" th:href="${nextPageUrl}" th:if="${!#strings.isEmpty(nextPageUrl)}"><span>下一页</span></a>
+            </div>
+            <div id="index_banner"></div>
+        </div>
+    </div>
+    <div class="clearfloat"></div>
+
+</div>
+<div th:replace="pc_public::footer"></div>
+
+<script type="text/javascript" src="/static/js/160505.js"></script>
+<script type="text/javascript">
+    var allurl = 1;
+    $(document).ready(function(){
+        $('p.url:first').addClass('on');
+        $('.open em').click(function(){
+            if(allurl == 1){
+                $('.url').removeClass('on');
+                allurl = 2;
+            }else{
+                $('.url').addClass('on');
+                allurl = 1;
+            }
+        });
+        $('.month').click(function(){
+            $(this).next().toggleClass('on');
+        });
+    });
+</script>
+<div id="index_250_load">
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#index_250_load").find("div").appendTo("#sidebar_250_fix");
+        $("#sidebar_250_fix").css("height", 250);
+        $("#index_250_load").remove();
+    });
+</script>
+<div id="index_banner_load">
+</div>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#index_banner_load").find("div").appendTo("#index_banner");
+        $("#index_banner").css("height", 90);
+        $("#index_banner_load").remove();
+    });
+</script>
+</body>
+</html>
