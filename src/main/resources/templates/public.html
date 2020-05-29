@@ -22,6 +22,23 @@
     <meta name="apple-mobile-web-app-title" content="686美女图片"/>
     <link rel="stylesheet" href="/static/css/150703m.css" type="text/css"/>
     <link rel="stylesheet" href="/static/css/fontello.css" type="text/css"/>
+    <script type = "text/javascript" >
+        function browserRedirect() {
+            var sUserAgent = navigator.userAgent.toLowerCase();
+            var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+            var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+            var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+            var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+            var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+            var bIsAndroid = sUserAgent.match(/android/i) == "android";
+            var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+            var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+            if (!(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) ){
+                window.location.href="/pc"+location.pathname+location.search;
+            }
+        }
+        browserRedirect();
+    </script>
     <script>
         var _hmt = _hmt || [];
         (function() {
@@ -88,7 +105,7 @@
     </header>
     <div id="search-template">
         <div class="search-form">
-            <form method="post" action="/search">
+            <form method="get" action="/search">
                 <fieldset>
                     <input type="search" name="keyWord" placeholder="点击这里搜索..." value=""
                            onfocus="if (this.value == '搜索 ...') {this.value = '';}"

@@ -40,7 +40,7 @@
         <li th:class="${#strings.equals(currentType,'bjnmn')} ? 'current-menu-parent' : ''"><a title="比基尼美女" th:href="'http://'+${domainName}+'/pc/?type=bjnmn'">比基尼</a></li>
     </ul>
     <span class="search">
-            <form method="post" class="searchform" action="/pc/search">
+            <form method="get" class="searchform" action="/pc/search">
                 <input class="search-input" name="keyWord" type="text" placeholder="搜索是种美德">
                 <button class="search-btn" type="submit">搜索</button>
             </form>

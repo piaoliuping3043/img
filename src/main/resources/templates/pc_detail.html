@@ -9,10 +9,10 @@
     <link rel="alternate" media="only screen and (max-width: 640px)"  th:href="'/detail?id='+${article.id}">
     <meta name="mobile-agent" th:content="'format=html5;url='+${domainName}+'/detail?id='+${article.id}">
     <script src="/static/js/uaredirect.js" type="text/javascript"></script>
-    <script type="text/javascript" th:text="'uaredirect(\''+${domainName}+'/detail?id='+${article.id}+');'"></script>
-    <title>翘臀爆乳Tube杨晨晨美女私密写真集(第1张) - 清纯妹子 - 美女图片 www.amm131.com</title>
-    <meta name="keywords" content="翘臀爆乳Tube杨晨晨美女私密写真集(第1张) " />
-    <meta name="description" content="翘臀爆乳Tube杨晨晨美女私密写真集第1页 - MM131美女图片每日分享最新最全最优质的美女图片。www.amm131.com" />
+    <script type="text/javascript" th:utext="${'uaredirect('''+domainName +'/detail?id='+article.id+''');'}"></script>
+    <title th:title="${article.title+'-'+domainName}"></title>
+    <meta name="keywords" th:content="${article.title}"/>
+    <meta name="description" th:content="${article.title+'-'+domainName}" />
     <meta name="renderer" content="webkit">
     <link href="/static/css/160128.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon"/>
@@ -36,7 +36,7 @@
         <div class="main-image">
             <p th:each="img:${imgList}"><img class='lazy' th:alt="${article.title}" src='/static/img/noimg.png' th:data-original="${img.url}" /></p>
         </div>
-        <div class="pagenavi"><a href="/xinggan/5769.html"><span>&laquo;上一组</span></a><a href="/mm/5770_2.html"><span>下一组&raquo;</span></a></div>
+        <!--<div class="pagenavi"><a href="/xinggan/5769.html"><span>&laquo;上一组</span></a><a href="/mm/5770_2.html"><span>下一组&raquo;</span></a></div>-->
     </div>
     <div class="clearfloat"></div>
 </div>
