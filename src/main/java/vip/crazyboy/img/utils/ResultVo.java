@@ -14,4 +14,7 @@ public class ResultVo {
     public static ResultVo success(Object data){
         return new ResultVo(0,"success",data);
     }
+    public static ResultVo fail(String msg){
+        return new ResultVo(1,msg,null);
+    }
 }
