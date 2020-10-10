@@ -13,3 +13,16 @@ spring:
     cache: false
     servlet:
       content-type: text/html
+
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+
+
+
+
+server:
+    tomcat:
+      uri-encoding: UTF-8

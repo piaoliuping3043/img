@@ -3,8 +3,6 @@ package vip.crazyboy.img.dao;
 import org.jfaster.mango.annotation.DB;
 import org.jfaster.mango.annotation.SQL;
 import org.jfaster.mango.crud.CrudDao;
-import sun.plugin.util.UserProfile;
-import vip.crazyboy.img.entity.ImgPO;
 import vip.crazyboy.img.entity.UserPO;
 
 import java.util.List;
