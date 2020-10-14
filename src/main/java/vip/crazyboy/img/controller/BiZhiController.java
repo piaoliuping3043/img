@@ -56,10 +56,10 @@ public class BiZhiController {
                     userPO.setCreateTime(new Date());
                     userPO.setUpdateTime(new Date());
                     userPO.setId(Long.valueOf(userDao.addAndReturnGeneratedId(userPO)));
+                    return ResultVo.success(userPO);
                 }else {
                     return ResultVo.fail("用户已存在");
                 }
-                return ResultVo.success(userPo);
             //登录
             case 2:
                 if (null == userPo){
