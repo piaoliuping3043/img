@@ -10,6 +10,6 @@ import java.util.List;
 @DB(name = "crawler", table = "user")
 public interface UserDao extends CrudDao<UserPO,Long> {
 
-    @SQL("SELECT * FROM user WHERE user_name = :1 and password=:2")
-    UserPO getUser(String userName, String password);
+    @SQL("SELECT * FROM user WHERE user_name = :1")
+    UserPO getUser(String userName);
 }

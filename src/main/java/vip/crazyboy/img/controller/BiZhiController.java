@@ -2,6 +2,7 @@ package vip.crazyboy.img.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.jfaster.mango.jdbc.exception.DuplicateKeyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,25 +45,40 @@ public class BiZhiController {
 
     @RequestMapping("/login")
     public synchronized ResultVo login(Integer type, String userName, String password){
+        UserPO userPo = userDao.getUser(userName);
         switch (type){
+            //注册
             case 1:
-                UserPO userPO = new UserPO();
-                userPO.setUserName(userName);
-                userPO.setPassword(password);
-                userPO.setCreateTime(new Date());
-                userPO.setUpdateTime(new Date());
-                try {
+                if (null == userPo){
+                    UserPO userPO = new UserPO();
+                    userPO.setUserName(userName);
+                    userPO.setPassword(password);
+                    userPO.setCreateTime(new Date());
+                    userPO.setUpdateTime(new Date());
                     userPO.setId(Long.valueOf(userDao.addAndReturnGeneratedId(userPO)));
-                } catch (Exception e) {
+                }else {
                     return ResultVo.fail("用户已存在");
                 }
-                return ResultVo.success(userPO);
+                return ResultVo.success(userPo);
+            //登录
             case 2:
-                UserPO userPo = userDao.getUser(userName, password);
                 if (null == userPo){
                     return ResultVo.fail("用户不存在");
-                }else {
+                }
+                if (userPo.getPassword().equals(password)) {
                     return ResultVo.success(userPo);
+                }else {
+                    return ResultVo.fail("密码错误");
+                }
+             //修改密码
+            case 3:
+                if (null != userPo){
+                    userPo.setPassword(password);
+                    userPo.setUpdateTime(new Date());
+                    userDao.update(userPo);
+                    return ResultVo.success(userPo);
+                }else {
+                    return ResultVo.fail("用户不存在");
                 }
             default:
                 return ResultVo.fail("指令错误");
@@ -71,18 +87,22 @@ public class BiZhiController {
     }
 
     @RequestMapping("/mark/add")
-    public ResultVo addMark(Long imgId, Long userId){
-        MarkPO markPO = new MarkPO();
-        markPO.setUserId(userId);
-        markPO.setImgId(imgId);
-        markPO.setCreateTime(new Date());
-        markPO.setUpdateTime(new Date());
-        try {
-            markDao.add(markPO);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResultVo.fail("重复添加");
+    public ResultVo addMark(Long imgId, Long userId, Integer type){
+        if (Integer.valueOf(1).equals(type)){
+            MarkPO markPO = new MarkPO();
+            markPO.setUserId(userId);
+            markPO.setImgId(imgId);
+            markPO.setCreateTime(new Date());
+            markPO.setUpdateTime(new Date());
+            try {
+                markDao.add(markPO);
+            } catch (DuplicateKeyException e) {
+                return ResultVo.fail("重复添加");
+            }
+        }else {
+            markDao.delMarks(userId, imgId);
         }
+
         return ResultVo.success(null);
     }
 
