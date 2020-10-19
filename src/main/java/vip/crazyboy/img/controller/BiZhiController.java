@@ -1,18 +1,18 @@
 package vip.crazyboy.img.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.jfaster.mango.jdbc.exception.DuplicateKeyException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import vip.crazyboy.img.dao.BiZhiDao;
+import vip.crazyboy.img.dao.BiZhiTypeDao;
 import vip.crazyboy.img.dao.MarkDao;
 import vip.crazyboy.img.dao.UserDao;
-import vip.crazyboy.img.entity.*;
+import vip.crazyboy.img.entity.BiZhiVO;
+import vip.crazyboy.img.entity.MarkPO;
+import vip.crazyboy.img.entity.UserPO;
 import vip.crazyboy.img.utils.CommonUtil;
 import vip.crazyboy.img.utils.ResultVo;
 
@@ -36,11 +36,21 @@ public class BiZhiController {
     @SuppressWarnings("all")
     private MarkDao markDao;
 
+    @Autowired
+    @SuppressWarnings("all")
+    private BiZhiTypeDao biZhiTypeDao;
+
+
 
     @RequestMapping("/show")
-    public ResultVo getArticleList(String type, @RequestParam(defaultValue = "1") Integer pageNum, Model model){
+    public ResultVo getArticleList(String type, @RequestParam(defaultValue = "1") Integer pageNum){
         List<BiZhiVO> po = biZhiDao.getBiZhiListVo(type, (pageNum-1) * CommonUtil.NUM_PAGE, CommonUtil.NUM_PAGE);
         return ResultVo.success(po);
+    }
+
+    @RequestMapping("/type")
+    public ResultVo getType(){
+        return ResultVo.success(biZhiTypeDao.getAll());
     }
 
     @RequestMapping("/login")
