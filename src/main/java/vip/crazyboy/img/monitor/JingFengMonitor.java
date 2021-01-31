@@ -9,6 +9,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Sets;
 import com.google.common.reflect.TypeToken;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import vip.crazyboy.img.entity.Items;
 import vip.crazyboy.img.entity.ItemsDTO;
@@ -27,9 +29,14 @@ import java.util.concurrent.ThreadLocalRandom;
 @Slf4j
 public class JingFengMonitor {
 
+    private static Logger logSmart = LoggerFactory.getLogger("LOG_SMART");
+    private static Logger logError = LoggerFactory.getLogger("LOG_ERROR");
     private static String url = "http://49.232.149.57:8073/send";
     private static String robotWxId = "A903866501";
     private static Set<String> wxGroupIds = Sets.newHashSet();
+    //是否打开测试
+    private static boolean openTest = false;
+
 
     static {
 //        wxGroupIds.add("9097050026@chatroom");//吃鸡小分队
@@ -37,6 +44,7 @@ public class JingFengMonitor {
         wxGroupIds.add("20503795584@chatroom");//对外监控群
 //        wxGroupIds.add("5082200292@chatroom");//七人行
 //        wxGroupIds.add("18903736578@chatroom");//监控测试
+//        openTest = true;
     }
     @PostConstruct
     public void monitor(){
@@ -50,7 +58,7 @@ public class JingFengMonitor {
         while (true){
             if (DateUtils.isBelong(new Date(),"20","6",true)) {
                 try {
-                    log.info("免打扰时间.");
+                    logSmart.info("免打扰时间.");
                     Thread.sleep(1000 * 60 * 30);
                     continue;
                 } catch (InterruptedException e) {
@@ -72,6 +80,7 @@ public class JingFengMonitor {
                 JingFengResultDTO<Items> resultDTO = GsonUtils.jsonToBean(res, new TypeToken<JingFengResultDTO<Items>>() {
                 });
                 for (ItemsDTO itemsDTO : resultDTO.getData().getItems()) {
+                    openTest(itemsDTO);
                     if (!Integer.valueOf(0).equals(itemsDTO.getStockNum()) && itemsDTO.getStockNum() > 20 ) {
                         String msg = "京丰放货: \r  日期[ "+itemsDTO.getBookDivideTimes()+" ]\r  剩余存库[ "+itemsDTO.getStockNum()+" ]\r  当前时间[ "+ DateUtil.format(new Date(),"HH:mm:ss"+" ]");
                         //放糖提醒 & @所有人 间隔 3分钟
@@ -80,7 +89,7 @@ public class JingFengMonitor {
                                 modifyGroupNotice("go! go! go!",s);
                             });
                             HttpUtil.get("https://sc.ftqq.com/SCU135702T4d9eb61083345ff9bc246a0e755e0b0d5fd879eaa898e.send?text="+msg);
-                            log.info("发送放糖和艾特所有人提醒." + msg);
+                            logSmart.info("发送放糖和艾特所有人提醒." + msg);
                             lastNotifyTime = System.currentTimeMillis();
                         }
 
@@ -89,7 +98,7 @@ public class JingFengMonitor {
                             wxGroupIds.forEach(s -> {
                                 sendGroupMsg(msg, s);
                             });
-                            log.info("发送群消息提醒." + msg);
+                            logSmart.info("发送群消息提醒." + msg);
                             lastSendTime = System.currentTimeMillis();
                         }
 
@@ -97,8 +106,14 @@ public class JingFengMonitor {
                 }
                 Thread.sleep(ThreadLocalRandom.current().nextInt(3000,9000));
             } catch (Exception e) {
-                log.error("异常",e);
+                logError.error("异常",e);
             }
+        }
+    }
+
+    private void openTest(ItemsDTO itemsDTO) {
+        if (openTest && itemsDTO.getBookDivideTimes().equals("2021-02-01")){
+            itemsDTO.setStockNum(21);
         }
     }
 
@@ -111,9 +126,9 @@ public class JingFengMonitor {
             map.put("to_wxid", groupId);// 对方id
             map.put("robot_wxid", robotWxId);// 账户id，用哪个账号去发送这条消息
             String result = HttpUtil.post(url, JSONObject.toJSONString(map));
-            log.info("发送群消息响应:[{}]",result);
+            logSmart.info("发送群消息响应:[{}]",result);
         } catch (Exception e) {
-           log.error("发送群消息异常",e);
+            logError.error("发送群消息异常",e);
         }
     }
 
@@ -126,9 +141,9 @@ public class JingFengMonitor {
             map.put("group_wxid", groupId);// 对方id
             map.put("robot_wxid", robotWxId);// 账户id，用哪个账号去发送这条消息
             String result = HttpUtil.post(url, JSONObject.toJSONString(map));
-            log.info("设置群公告响应:[{}]",result);
+            logSmart.info("设置群公告响应:[{}]",result);
         } catch (Exception e) {
-            log.error("设置群公告异常",e);
+            logError.error("设置群公告异常",e);
         }
     }
 }
