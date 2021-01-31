@@ -32,10 +32,10 @@ public class JingFengMonitor {
     private static Set<String> wxGroupIds = Sets.newHashSet();
 
     static {
-        wxGroupIds.add("9097050026@chatroom");//吃鸡小分队
-        wxGroupIds.add("2750449706@chatroom");//敬君神通,伏地呼兄
+//        wxGroupIds.add("9097050026@chatroom");//吃鸡小分队
+//        wxGroupIds.add("2750449706@chatroom");//敬君神通,伏地呼兄
         wxGroupIds.add("20503795584@chatroom");//对外监控群
-        wxGroupIds.add("5082200292@chatroom");//七人行
+//        wxGroupIds.add("5082200292@chatroom");//七人行
     }
     @PostConstruct
     public void monitor(){
