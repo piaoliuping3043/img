@@ -36,6 +36,7 @@ public class JingFengMonitor {
 //        wxGroupIds.add("2750449706@chatroom");//敬君神通,伏地呼兄
         wxGroupIds.add("20503795584@chatroom");//对外监控群
 //        wxGroupIds.add("5082200292@chatroom");//七人行
+//        wxGroupIds.add("18903736578@chatroom");//监控测试
     }
     @PostConstruct
     public void monitor(){
@@ -65,14 +66,14 @@ public class JingFengMonitor {
                 httpRequest.header(Header.ACCEPT_ENCODING, "gzip, deflate, br");
                 httpRequest.header(Header.ACCEPT_LANGUAGE, "zh-CN,zh;q=0.9");
                 httpRequest.header(Header.CONTENT_TYPE, "application/json;charset=UTF-8");
-                hashMap.put("calendarDate", System.currentTimeMillis());
+                hashMap.put("calendarDate", System.currentTimeMillis()+(2 * 24 * 60 * 60 * 1000));
                 String res = httpRequest.body(JSONUtil.toJsonPrettyStr(hashMap)).timeout(6000).execute().body();
                 log.info(res);
                 JingFengResultDTO<Items> resultDTO = GsonUtils.jsonToBean(res, new TypeToken<JingFengResultDTO<Items>>() {
                 });
                 for (ItemsDTO itemsDTO : resultDTO.getData().getItems()) {
                     if (!Integer.valueOf(0).equals(itemsDTO.getStockNum()) && itemsDTO.getStockNum() > 20 ) {
-                        String msg = "京丰放货: 日期[ "+itemsDTO.getBookDivideTimes()+" ],剩余存库[ "+itemsDTO.getStockNum()+" ] 当前时间[ "+ DateUtil.format(new Date(),"HH:mm:ss.SSS"+" ]");
+                        String msg = "京丰放货: \r  日期[ "+itemsDTO.getBookDivideTimes()+" ]\r  剩余存库[ "+itemsDTO.getStockNum()+" ]\r  当前时间[ "+ DateUtil.format(new Date(),"HH:mm:ss"+" ]");
                         //放糖提醒 & @所有人 间隔 3分钟
                         if (System.currentTimeMillis()-lastNotifyTime > 3*60*1000) {
                             wxGroupIds.forEach(s -> {
@@ -95,8 +96,8 @@ public class JingFengMonitor {
                     }
                 }
                 Thread.sleep(ThreadLocalRandom.current().nextInt(3000,9000));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                log.error("异常",e);
             }
         }
     }
@@ -108,7 +109,7 @@ public class JingFengMonitor {
             map.put("type", "100");// Api数值（可以参考 - api列表demo）
             map.put("msg", URLEncoder.encode(msg, "UTF-8"));// 发送内容
             map.put("to_wxid", groupId);// 对方id
-            map.put("robot_wxid", "A903866501");// 账户id，用哪个账号去发送这条消息
+            map.put("robot_wxid", robotWxId);// 账户id，用哪个账号去发送这条消息
             String result = HttpUtil.post(url, JSONObject.toJSONString(map));
             log.info("发送群消息响应:[{}]",result);
         } catch (Exception e) {
@@ -123,7 +124,7 @@ public class JingFengMonitor {
             map.put("type", "308");// Api数值（可以参考 - api列表demo）
             map.put("notice", notice);// 发送内容
             map.put("group_wxid", groupId);// 对方id
-            map.put("robot_wxid", "A903866501");// 账户id，用哪个账号去发送这条消息
+            map.put("robot_wxid", robotWxId);// 账户id，用哪个账号去发送这条消息
             String result = HttpUtil.post(url, JSONObject.toJSONString(map));
             log.info("设置群公告响应:[{}]",result);
         } catch (Exception e) {
