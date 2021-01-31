@@ -17,23 +17,28 @@ import vip.crazyboy.img.entity.ItemsDTO;
 import vip.crazyboy.img.entity.JingFengResultDTO;
 import vip.crazyboy.img.utils.DateUtils;
 import vip.crazyboy.img.utils.GsonUtils;
+import vip.crazyboy.img.utils.StandardThreadExecutor;
 
 import javax.annotation.PostConstruct;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
 @Component
 @Slf4j
 public class JingFengMonitor {
-
+    //线程池
+    public static final ExecutorService MONITOR_THREAD_EXECUTOR = new StandardThreadExecutor(5,5,10,TimeUnit.SECONDS,new LinkedBlockingQueue<>(),"monitor");
     private static Logger logSmart = LoggerFactory.getLogger("LOG_SMART");
     private static Logger logError = LoggerFactory.getLogger("LOG_ERROR");
+    private static Set<String> wxGroupIds = Sets.newHashSet();
     private static String url = "http://49.232.149.57:8073/send";
     private static String robotWxId = "A903866501";
-    private static Set<String> wxGroupIds = Sets.newHashSet();
     //是否打开测试
     private static boolean openTest = false;
 
@@ -48,6 +53,10 @@ public class JingFengMonitor {
     }
     @PostConstruct
     public void monitor(){
+        MONITOR_THREAD_EXECUTOR.execute(() -> begainMonitor());
+    }
+
+    private void begainMonitor() {
         String url = "http://100000552840.yuyue.n.weimob.com/api3/interactive/advance/microbook/mobile/getAvailableCalendar";
         String cookies = "rprm_cuid=3124274306btvhslvm38; saas.express.session=s%3AZS5mkQfB1qL8JwtQi3ylbCJ175n5eK0v.v%2FyfCOpp1wc%2FkPUEFQX%2FvA%2F2RwS9vq8FOm8RUC3a5WA";
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -61,7 +70,8 @@ public class JingFengMonitor {
                     logSmart.info("免打扰时间.");
                     Thread.sleep(1000 * 60 * 30);
                     continue;
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
+                    logError.error("计算是否在免打扰时间出错",e);
                 }
             }
             try {

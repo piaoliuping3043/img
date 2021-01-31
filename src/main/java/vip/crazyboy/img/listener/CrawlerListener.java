@@ -38,8 +38,8 @@ public class CrawlerListener implements ApplicationListener<ContextRefreshedEven
     private BiZhiDao biZhiDao;
 
     static {
-        pageThreadExecutor = new StandardThreadExecutor(20,20,1000*10, TimeUnit.SECONDS,new LinkedBlockingQueue<>(),"page");
-        imgThreadExecutor = new StandardThreadExecutor(20,20,1000*10, TimeUnit.SECONDS,new LinkedBlockingQueue<>(),"img");
+        pageThreadExecutor = new StandardThreadExecutor(20,20,10, TimeUnit.SECONDS,new LinkedBlockingQueue<>(),"page");
+        imgThreadExecutor = new StandardThreadExecutor(20,20,10, TimeUnit.SECONDS,new LinkedBlockingQueue<>(),"img");
         int i = 1;
         while (i <= 643 ){
             pageQueue.add("https://sj.enterdesk.com/1080x1920/"+i+".html");

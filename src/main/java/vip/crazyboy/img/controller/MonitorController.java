@@ -9,6 +9,7 @@ import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vip.crazyboy.img.monitor.JingFengMonitor;
 
 import javax.annotation.PostConstruct;
 import java.net.URLEncoder;
@@ -81,9 +82,7 @@ public class MonitorController {
     @RequestMapping("/start")
     public String start() {
         switchFlag = true;
-        new Thread(() -> {
-            check();
-        }).start();
+        JingFengMonitor.MONITOR_THREAD_EXECUTOR.execute(() -> check());
         return "开关已打开";
     }
 
@@ -96,9 +95,7 @@ public class MonitorController {
     @PostConstruct
     public void init() {
         switchFlag = true;
-        new Thread(() -> {
-            check();
-        }).start();
+        JingFengMonitor.MONITOR_THREAD_EXECUTOR.execute(() -> check());
     }
 
     @RequestMapping("/allSku")

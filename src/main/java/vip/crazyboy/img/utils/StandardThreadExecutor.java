@@ -38,6 +38,7 @@ public class StandardThreadExecutor extends ThreadPoolExecutor {
     public StandardThreadExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue<Runnable> workQueue, String threadPoolName) {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue);
         this.threadPoolName = threadPoolName;
+        this.allowCoreThreadTimeOut(true);
         threadMap.put(threadPoolName, this);
     }
 
