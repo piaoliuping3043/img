@@ -58,14 +58,14 @@ public class JingFengMonitor {
 
     private void begainMonitor() {
         String url = "http://100000552840.yuyue.n.weimob.com/api3/interactive/advance/microbook/mobile/getAvailableCalendar";
-        String cookies = "rprm_cuid=3124274306btvhslvm38; saas.express.session=s%3AZS5mkQfB1qL8JwtQi3ylbCJ175n5eK0v.v%2FyfCOpp1wc%2FkPUEFQX%2FvA%2F2RwS9vq8FOm8RUC3a5WA";
+        String cookies = "rprm_cuid=3124274306btvhslvm38; saas.express.session=s%3A476XqGxLYN0uUw42PyCtn1HAtZs4WLG_.nrGD9ynJJzyoSgzICk4%2FPu35qry8l%2Bd9jPus8f8r6%2Fs";
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("sno", "12556");
         hashMap.put("pid", "100000552840");
         long lastNotifyTime = System.currentTimeMillis() - 3 * 60 * 1000;
         long lastSendTime = System.currentTimeMillis() -  30 * 1000;
         while (true){
-            if (DateUtils.isBelong(new Date(),"20","6",true)) {
+            if (DateUtils.isBelong(new Date(),"23","6",true)) {
                 try {
                     logSmart.info("免打扰时间.");
                     Thread.sleep(1000 * 60 * 30);
@@ -75,6 +75,7 @@ public class JingFengMonitor {
                 }
             }
             try {
+                Thread.sleep(ThreadLocalRandom.current().nextInt(3000,9000));
                 HttpRequest httpRequest = HttpRequest.post(url);
                 httpRequest.cookie(cookies);
                 httpRequest.header(Header.REFERER, "http://100000552840.yuyue.n.weimob.com/saas/yuyue/100000552840/12556/calendar?pno=", false);
@@ -114,7 +115,6 @@ public class JingFengMonitor {
 
                     }
                 }
-                Thread.sleep(ThreadLocalRandom.current().nextInt(3000,9000));
             } catch (Exception e) {
                 logError.error("异常",e);
             }
