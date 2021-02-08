@@ -38,7 +38,7 @@ public class JingFengMonitor {
     private static Logger logError = LoggerFactory.getLogger("LOG_ERROR");
     private static Set<String> wxGroupIds = Sets.newHashSet();
     private static String url = "http://49.232.149.57:8073/send";
-    private static String robotWxId = "A903866501";
+    private static String robotWxId = "wxid_fjuu0pj2pon412";
     //是否打开测试
     private static boolean openTest = false;
 
@@ -53,7 +53,7 @@ public class JingFengMonitor {
     }
     @PostConstruct
     public void monitor(){
-        MONITOR_THREAD_EXECUTOR.execute(() -> begainMonitor());
+//        MONITOR_THREAD_EXECUTOR.execute(() -> begainMonitor());
     }
 
     private void begainMonitor() {
@@ -127,7 +127,7 @@ public class JingFengMonitor {
         }
     }
 
-    public void sendGroupMsg(String msg, String groupId){
+    public static void sendGroupMsg(String msg, String groupId){
         try {
             // 封装返回数据结构
             HashMap<String, String> map = new HashMap<String, String>();
@@ -142,7 +142,7 @@ public class JingFengMonitor {
         }
     }
 
-    public void modifyGroupNotice(String notice, String groupId){
+    public static void modifyGroupNotice(String notice, String groupId){
         try {
             // 封装返回数据结构
             HashMap<String, String> map = new HashMap<String, String>();

@@ -164,6 +164,7 @@ public class MonitorController {
         notifyMap.put(skuId, System.currentTimeMillis());
         String url = "https://item.jd.com/"+skuId+".html";
         HttpUtil.get("https://sc.ftqq.com/SCU135702T4d9eb61083345ff9bc246a0e755e0b0d5fd879eaa898e.send?text="+skuMap.get(skuId)+" 放货了!&desp="+URLEncoder.encode(url));
+        JingFengMonitor.sendGroupMsg(url,"2750449706@chatroom");
         log.info("检测到放货sku[{}]商品名字[{}].",skuId,skuMap.get(skuId));
     }
 }

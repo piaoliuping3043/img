@@ -17,18 +17,19 @@ import java.util.HashMap;
  */
 public class WxMsgSendUtils {
     private static String url = "http://49.232.149.57:8073/send";
-    private static String robotWxId = "A903866501";
+    private static String robotWxId = "wxid_fjuu0pj2pon412";
+    private static String toWxId = "20540595016@chatroom";
 
 
     public static void main(String[] args) throws Exception{
 //        System.out.println(modify_group_notice(robotWxId, "20503795584@chatroom","佳辉沙雕"));
-        System.out.println(URLDecoder.decode(get_group_list("A903866501"),"utf-8"));
+//        System.out.println(URLDecoder.decode(get_group_list(robotWxId),"utf-8"));
 
         // 封装返回数据结构
-        HashMap<String, String> map = new HashMap<String, String>();
+        HashMap<String, String> map = new HashMap<>();
         map.put("type", "100");// Api数值（可以参考 - api列表demo）
-        map.put("msg", URLEncoder.encode("test", "UTF-8"));// 发送内容
-        map.put("to_wxid", "20503795584@chatroom");// 对方id
+        map.put("msg", URLEncoder.encode("中文测试", "UTF-8"));// 发送内容
+        map.put("to_wxid", toWxId);// 对方id
         map.put("robot_wxid", robotWxId);// 账户id，用哪个账号去发送这条消息
         HttpRequest.post(url).timeout(3000).body(JSONObject.toJSONString(map),"application/x-www-form-urlencoded").execute().body();
 //        return HttpUtils.postJson(url, JSONObject.toJSONString(map));
