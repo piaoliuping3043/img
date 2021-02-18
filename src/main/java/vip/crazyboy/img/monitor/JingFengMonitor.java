@@ -46,19 +46,19 @@ public class JingFengMonitor {
     static {
 //        wxGroupIds.add("9097050026@chatroom");//吃鸡小分队
 //        wxGroupIds.add("2750449706@chatroom");//敬君神通,伏地呼兄
-        wxGroupIds.add("20503795584@chatroom");//对外监控群
+//        wxGroupIds.add("20503795584@chatroom");//对外监控群
 //        wxGroupIds.add("5082200292@chatroom");//七人行
-//        wxGroupIds.add("18903736578@chatroom");//监控测试
+        wxGroupIds.add("18903736578@chatroom");//监控测试
 //        openTest = true;
     }
     @PostConstruct
     public void monitor(){
-//        MONITOR_THREAD_EXECUTOR.execute(() -> begainMonitor());
+        MONITOR_THREAD_EXECUTOR.execute(() -> begainMonitor());
     }
 
     private void begainMonitor() {
         String url = "http://100000552840.yuyue.n.weimob.com/api3/interactive/advance/microbook/mobile/getAvailableCalendar";
-        String cookies = "rprm_cuid=3124274306btvhslvm38; saas.express.session=s%3A476XqGxLYN0uUw42PyCtn1HAtZs4WLG_.nrGD9ynJJzyoSgzICk4%2FPu35qry8l%2Bd9jPus8f8r6%2Fs";
+        String cookies = "rprm_cuid=616440315mgqfte1q7gc; pluto=wx-VOBY3tkbCB6EAihIOyv9Ub1rpKm79; rprm_appShowId2=-kla9kf84fdkg9h83s16; saas.express.session=s%3Awx-VOBY3tkbCB6EAihIOyv9Ub1rpKm79.wYjrS%2FQz6WYjhp7%2BnCS%2B8yrUVSoaJsiZFjCy1b%2F7UkY";
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("sno", "12556");
         hashMap.put("pid", "100000552840");
@@ -90,6 +90,10 @@ public class JingFengMonitor {
                 log.info(res);
                 JingFengResultDTO<Items> resultDTO = GsonUtils.jsonToBean(res, new TypeToken<JingFengResultDTO<Items>>() {
                 });
+                //请求结果失败 直接放弃遍历.
+                if (!resultDTO.isSuccess()){
+                    continue;
+                }
                 for (ItemsDTO itemsDTO : resultDTO.getData().getItems()) {
                     openTest(itemsDTO);
                     if (!Integer.valueOf(0).equals(itemsDTO.getStockNum()) && itemsDTO.getStockNum() > 20 ) {
